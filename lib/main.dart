@@ -17,13 +17,13 @@ void main() async {
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
 
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
