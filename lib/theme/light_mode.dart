@@ -1,0 +1,11 @@
+import 'package:flutter/material.dart';
+
+ThemeData lightMode = ThemeData(
+  colorScheme: ColorScheme.light(
+    surface: Colors.blueGrey.shade100,
+    primary: Colors.blueGrey,
+    secondary: Colors.blueGrey.shade300,
+    tertiary: Colors.white,
+    inversePrimary: Colors.blueGrey.shade900,
+  ),
+);
