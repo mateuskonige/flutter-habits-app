@@ -89,10 +89,10 @@ class HabitDatabase extends ChangeNotifier {
                 date.day == DateTime.now().day,
           );
         }
+        await isar.habits.put(existingHabit);
       });
 
       // save and re-read
-      await isar.habits.put(existingHabit);
       readHabits();
     }
   }
