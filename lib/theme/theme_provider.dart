@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habits_app/theme/dark_mode.dart';
 import 'package:habits_app/theme/light_mode.dart';
 
-class ThemeProvider extends ChangeNotifier {
+class ThemeProvider with ChangeNotifier {
   ThemeData _themeData = lightMode;
 
   ThemeData get themeData => _themeData;
@@ -11,6 +11,7 @@ class ThemeProvider extends ChangeNotifier {
 
   set themeData(ThemeData themeData) {
     _themeData = themeData;
+    notifyListeners();
   }
 
   void toggleTheme() {
