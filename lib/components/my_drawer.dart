@@ -11,17 +11,21 @@ class MyDrawer extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(child: Text("Habits App")),
-          Row(
-            children: [
-              Text("Dark Mode"),
-              Switch(
-                value: Provider.of<ThemeProvider>(context).isDarkMode,
-                onChanged: (value) => Provider.of<ThemeProvider>(
-                  context,
-                  listen: false,
-                ).toggleTheme(),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Dark Mode"),
+                Switch(
+                  value: Provider.of<ThemeProvider>(context).isDarkMode,
+                  onChanged: (value) => Provider.of<ThemeProvider>(
+                    context,
+                    listen: false,
+                  ).toggleTheme(),
+                ),
+              ],
+            ),
           ),
         ],
       ),
