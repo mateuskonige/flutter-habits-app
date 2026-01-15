@@ -16,6 +16,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _textController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    context.read<HabitDatabase>().readHabits();
+  }
+
   // create new habit
   void createNewHabit() {
     showDialog(
@@ -56,6 +62,48 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void deleteHabit(int id) {
+    context.read<HabitDatabase>().deleteHabit(id);
+  }
+
+  void editHabit(Habit habit) {
+    _textController.text = habit.name;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Edit Habit ${habit.id}"),
+        content: TextField(
+          controller: _textController,
+          decoration: InputDecoration(
+            labelText: "Name",
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          MaterialButton(
+            color: Theme.of(context).colorScheme.primary,
+            onPressed: () {
+              // create
+              context.read<HabitDatabase>().updateHabitName(
+                habit.id,
+                _textController.text,
+              );
+              // clear controller
+              _textController.clear();
+              // popout dialog
+              Navigator.pop(context);
+            },
+            child: Text(
+              "Save",
+              style: TextStyle(color: Theme.of(context).colorScheme.surface),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +124,7 @@ class _HomePageState extends State<HomePage> {
     // list of habits
     List<Habit> currentHabits = habitDatabase.currentHabits;
 
-    return ListView.builder(
+    return ListView.separated(
       itemCount: currentHabits.length,
       itemBuilder: (context, index) {
         final habit = currentHabits[index];
@@ -86,7 +134,12 @@ class _HomePageState extends State<HomePage> {
           habit: habit,
           isCompleted: isCompletedToday,
           onChanged: (value) => checkHabit(value, habit),
+          deleteHabit: (value) => deleteHabit(habit.id),
+          editHabit: (value) => editHabit(habit),
         );
+      },
+      separatorBuilder: (context, index) {
+        return SizedBox(height: 12);
       },
     );
   }
