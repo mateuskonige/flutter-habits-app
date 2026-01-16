@@ -10,13 +10,30 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(child: Text("Habits App")),
+          Center(
+            child: Column(
+              children: [
+                SizedBox(height: 96),
+                Icon(Icons.rule, size: 48),
+                Text("Habits App"),
+                SizedBox(height: 48),
+                Divider(color: Theme.of(context).colorScheme.secondary),
+              ],
+            ),
+          ),
+
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Dark Mode"),
+                Row(
+                  children: [
+                    Icon(Icons.nights_stay_outlined),
+                    SizedBox(width: 12),
+                    Text("Dark Mode"),
+                  ],
+                ),
                 Switch(
                   value: Provider.of<ThemeProvider>(context).isDarkMode,
                   onChanged: (value) => Provider.of<ThemeProvider>(
