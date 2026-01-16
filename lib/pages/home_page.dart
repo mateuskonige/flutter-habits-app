@@ -108,9 +108,23 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Habits App"),
+        // For Material 3, explicitly set scrolledUnderElevation
+        scrolledUnderElevation: 0,
+        // Set a fixed background color
+        backgroundColor: Theme.of(context).colorScheme.surface,
+      ),
       drawer: MyDrawer(),
-      body: ListView(children: [_buildHeatMap(), _buildHabitList()]),
+      body: Column(
+        children: [
+          // Fixed heatmap at the top
+          _buildHeatMap(),
+
+          // Expanded list that scrolls independently
+          Expanded(child: _buildHabitList()),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewHabit,
         child: Icon(Icons.add),
@@ -149,9 +163,7 @@ class _HomePageState extends State<HomePage> {
     List<Habit> currentHabits = habitDatabase.currentHabits;
 
     return ListView.separated(
-      padding: EdgeInsets.symmetric(vertical: 12),
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.only(top: 12, bottom: 36),
       itemCount: currentHabits.length,
       itemBuilder: (context, index) {
         final habit = currentHabits[index];
