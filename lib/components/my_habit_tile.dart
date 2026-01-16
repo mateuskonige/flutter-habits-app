@@ -29,7 +29,7 @@ class MyHabitTile extends StatelessWidget {
             SlidableAction(
               onPressed: editHabit,
               icon: Icons.edit,
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(12),
             ),
             SlidableAction(
